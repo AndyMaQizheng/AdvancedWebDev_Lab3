@@ -1,4 +1,7 @@
-﻿namespace AdvancedWebDev_Lab3.DataAccess.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace AdvancedWebDev_Lab3.DataAccess.Models
 {
     public partial class Genre
     {

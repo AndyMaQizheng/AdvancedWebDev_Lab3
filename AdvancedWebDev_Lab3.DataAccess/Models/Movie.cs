@@ -4,10 +4,10 @@
     {
         public Movie()
         {
+            Casts = new HashSet<Cast>();
+            Directors = new HashSet<Director>();
             Genres = new HashSet<Genre>();
             Keywords = new HashSet<Keyword>();
-            Directors = new HashSet<Person>();
-            Cast = new HashSet<Person>();
             Productioncompanies = new HashSet<ProductionCompany>();
         }
 
@@ -28,10 +28,10 @@
         public double? BudgetAdj { get; set; }
         public double? RevenueAdj { get; set; }
 
+        public virtual ICollection<Cast> Casts { get; set; }
+        public virtual ICollection<Director> Directors { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
         public virtual ICollection<Keyword> Keywords { get; set; }
-        public virtual ICollection<Person> Directors { get; set; }
-        public virtual ICollection<Person> Cast { get; set; }
         public virtual ICollection<ProductionCompany> Productioncompanies { get; set; }
     }
 }

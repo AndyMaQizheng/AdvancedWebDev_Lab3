@@ -14,6 +14,8 @@ namespace AdvancedWebDev_Lab3.DataAccess
         {
         }
 
+        public virtual DbSet<Cast> Casts { get; set; } = null!;
+        public virtual DbSet<Director> Directors { get; set; } = null!;
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<Keyword> Keywords { get; set; } = null!;
         public virtual DbSet<Movie> Movies { get; set; } = null!;
@@ -30,10 +32,24 @@ namespace AdvancedWebDev_Lab3.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Cast>(entity =>
+            {
+                entity.ToTable("Cast");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Director>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+            });
+
             modelBuilder.Entity<Genre>(entity =>
             {
-                entity.ToTable("Genres");
-
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasColumnName("name");
@@ -96,6 +112,40 @@ namespace AdvancedWebDev_Lab3.DataAccess
                 entity.Property(e => e.VoteAverage).HasColumnName("vote_average");
 
                 entity.Property(e => e.VoteCount).HasColumnName("vote_count");
+
+                entity.HasMany(d => d.Casts)
+                    .WithMany(p => p.Movies)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "Moviescast",
+                        l => l.HasOne<Cast>().WithMany().HasForeignKey("CastId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviescast_Cast"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviescast_Movies"),
+                        j =>
+                        {
+                            j.HasKey("MovieId", "CastId").HasName("PK_moviespersons");
+
+                            j.ToTable("moviescast");
+
+                            j.IndexerProperty<int>("MovieId").HasColumnName("movie_id");
+
+                            j.IndexerProperty<int>("CastId").HasColumnName("cast_id");
+                        });
+
+                entity.HasMany(d => d.Directors)
+                    .WithMany(p => p.Movies)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "Moviesdirector",
+                        l => l.HasOne<Director>().WithMany().HasForeignKey("DirectorId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviedirectors_Directors"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviedirectors_Movies"),
+                        j =>
+                        {
+                            j.HasKey("MovieId", "DirectorId").HasName("PK_moviedirectors");
+
+                            j.ToTable("moviesdirectors");
+
+                            j.IndexerProperty<int>("MovieId").HasColumnName("movie_id");
+
+                            j.IndexerProperty<int>("DirectorId").HasColumnName("director_id");
+                        });
 
                 entity.HasMany(d => d.Genres)
                     .WithMany(p => p.Movies)

@@ -12,11 +12,17 @@ namespace AdvancedWebDev_Lab3.DataAccess
         {
             this.dbContext = dbContext;
 
+            CastRepo = new CastRepo(dbContext);
+            DirectorRepo = new DirectorRepo(dbContext);
             GenreRepo = new GenreRepo(dbContext);
             KeywordRepo = new KeywordRepo(dbContext);
             Movies = new MovieRepo(dbContext);
             ProdCompanyRepo = new ProdCompanyRepo(dbContext);
         }
+
+        public ICastRepo CastRepo { get; private set; }
+
+        public IDirectorRepo DirectorRepo { get; private set; }
 
         public IGenreRepo GenreRepo { get; private set; }
 

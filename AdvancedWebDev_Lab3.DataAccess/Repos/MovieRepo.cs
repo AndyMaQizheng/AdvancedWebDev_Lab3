@@ -21,8 +21,6 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
         {
             return await dbContext.Movies
                 .Include(m => m.Genres)
-                .Include(m => m.Cast)
-                .Include(m => m.Directors)
                 .Include(m => m.Keywords)
                 .Include(m => m.Productioncompanies)
                 .SingleAsync(m => m.Id == id);

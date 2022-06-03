@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AdvancedWebDev_Lab3
+﻿namespace AdvancedWebDev_Lab3.DataAccess.Models
 {
-    public partial class Cast
+    public partial class Director
     {
-        public Cast()
+        public Director()
         {
             Movies = new HashSet<Movie>();
         }
