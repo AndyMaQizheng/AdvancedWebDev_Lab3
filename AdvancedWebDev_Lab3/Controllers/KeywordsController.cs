@@ -19,6 +19,9 @@ namespace AdvancedWebDev_Lab3.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get all keywords.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAllKeywords()
         {

@@ -4,7 +4,9 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos.Interfaces
 {
     public interface IDirectorRepo
     {
+        /// <summary>
+        /// Get all directors.
+        /// </summary>
         Task<IEnumerable<Director>> GetAllDirectorsAsync();
-        Task<Director> GetDirectorByIdAsync(int id);
     }
 }

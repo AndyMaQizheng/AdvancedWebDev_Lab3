@@ -13,16 +13,12 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Get all genres.
+        /// </summary>
         public async Task<IEnumerable<Genre>> GetAllGenresAsync()
         {
             return await dbContext.Genres.ToListAsync();
-        }
-
-        public async Task<Genre> GetGenreByIdAsync(int id)
-        {
-            return await dbContext.Genres
-                .Include(g => g.Movies)
-                .SingleAsync(g => g.Id == id);
         }
     }
 }

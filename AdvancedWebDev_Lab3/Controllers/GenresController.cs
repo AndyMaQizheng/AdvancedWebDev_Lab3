@@ -14,20 +14,15 @@ namespace AdvancedWebDev_Lab3.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get all genres.
+        /// </summary>
         [HttpGet()]
         public async Task<IActionResult> GetAllGenres()
         {
             var genres = await unitOfWork.GenreRepo.GetAllGenresAsync();
 
             return Ok(genres);
-        }
-
-        [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var genre = await unitOfWork.GenreRepo.GetGenreByIdAsync(id);
-
-            return Ok(genre);
         }
     }
 }

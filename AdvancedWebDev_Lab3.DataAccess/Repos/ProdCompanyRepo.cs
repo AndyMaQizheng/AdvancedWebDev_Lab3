@@ -13,16 +13,12 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Get all production companies.
+        /// </summary>
         public async Task<IEnumerable<ProductionCompany>> GetAllProductionCompaniesAsync()
         {
             return await dbContext.ProductionCompanies.ToListAsync();
-        }
-
-        public async Task<ProductionCompany> GetProductionCompanyByIdAsync(int id)
-        {
-            return await dbContext.ProductionCompanies
-                .Include(p => p.Movies)
-                .SingleAsync(p => p.Id == id);
         }
     }
 }

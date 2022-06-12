@@ -13,6 +13,9 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Get all genres.
+        /// </summary>
         public async Task<IEnumerable<Keyword>> GetAllKeywordsAsync()
         {
             return await dbContext.Keywords.ToListAsync();

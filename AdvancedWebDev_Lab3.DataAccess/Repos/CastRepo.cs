@@ -13,16 +13,14 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Get all cast members.
+        /// </summary>
         public async Task<IEnumerable<Cast>> GetAllCastAsync()
         {
-            return await dbContext.Casts.ToListAsync();
-        }
-
-        public async Task<Cast> GetCastByIdAsync(int id)
-        {
             return await dbContext.Casts
-                .Include(c => c.Movies)
-                .SingleAsync(c => c.Id == id);
+                .Where(c => !string.IsNullOrWhiteSpace(c.Name))
+                .ToListAsync();
         }
     }
 }

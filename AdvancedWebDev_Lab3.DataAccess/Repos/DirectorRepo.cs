@@ -13,16 +13,12 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Get all directors.
+        /// </summary>
         public async Task<IEnumerable<Director>> GetAllDirectorsAsync()
         {
             return await dbContext.Directors.ToListAsync();
-        }
-
-        public async Task<Director> GetDirectorByIdAsync(int id)
-        {
-            return await dbContext.Directors
-                .Include(d => d.Movies)
-                .SingleAsync(d => d.Id == id);
         }
     }
 }

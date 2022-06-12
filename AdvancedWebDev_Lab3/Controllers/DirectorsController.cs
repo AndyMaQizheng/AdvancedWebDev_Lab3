@@ -14,20 +14,15 @@ namespace AdvancedWebDev_Lab3.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get all directors.
+        /// </summary>
         [HttpGet()]
         public async Task<IActionResult> GetAllDirectors()
         {
             var directors = await unitOfWork.DirectorRepo.GetAllDirectorsAsync();
 
             return Ok(directors);
-        }
-
-        [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var director = await unitOfWork.DirectorRepo.GetDirectorByIdAsync(id);
-
-            return Ok(director);
         }
     }
 }

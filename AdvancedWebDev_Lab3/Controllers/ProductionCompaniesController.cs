@@ -14,20 +14,15 @@ namespace AdvancedWebDev_Lab3.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get all production companies.
+        /// </summary>
         [HttpGet()]
         public async Task<IActionResult> GetAllProductionCompanies()
         {
             var prodCompanies = await unitOfWork.ProdCompanyRepo.GetAllProductionCompaniesAsync();
 
             return Ok(prodCompanies);
-        }
-
-        [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var prodCompany = await unitOfWork.ProdCompanyRepo.GetProductionCompanyByIdAsync(id);
-
-            return Ok(prodCompany);
         }
     }
 }

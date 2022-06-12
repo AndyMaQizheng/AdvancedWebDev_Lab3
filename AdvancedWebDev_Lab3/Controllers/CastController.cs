@@ -14,18 +14,13 @@ namespace AdvancedWebDev_Lab3.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get all cast members.
+        /// </summary>
         [HttpGet()]
         public async Task<IActionResult> GetAllCast()
         {
             var cast = await unitOfWork.CastRepo.GetAllCastAsync();
-
-            return Ok(cast);
-        }
-
-        [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var cast = await unitOfWork.CastRepo.GetCastByIdAsync(id);
 
             return Ok(cast);
         }
