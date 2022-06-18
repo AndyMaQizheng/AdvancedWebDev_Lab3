@@ -34,13 +34,27 @@ namespace AdvancedWebDev_Lab3.Controllers
         /// <summary>
         /// Get distinct list of release years.
         /// </summary>
-        /// <returns></returns>
         [HttpGet("releaseYears")]
         public async Task<IActionResult> GetReleaseYears()
         {
             var releaseYears = await unitOfWork.Movies.GetReleaseYearsAsync();
 
             return Ok(releaseYears);
+        }
+
+        /// <summary>
+        /// Get list of movies that match ids.
+        /// </summary>
+        [HttpPost("getByMovieIds")]
+        public async Task<IActionResult> GetMoviesByIdAsync(IEnumerable<int> movieIds)
+        {
+            var results = await unitOfWork.Movies.GetMoviesByIdsAsync(movieIds);
+
+            var mappedMovies = mapper
+                .Map<IEnumerable<Movie>>(results)
+                .OrderBy(m => m.Title);
+
+            return Ok(new ApiResponse<IEnumerable<Movie>>(mappedMovies));
         }
 
         /// <summary>

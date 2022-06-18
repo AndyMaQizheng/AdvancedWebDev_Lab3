@@ -10,6 +10,11 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos.Interfaces
         Task<IEnumerable<Movie>> GetAllMoviesAsync();
 
         /// <summary>
+        /// Get all movies where id is in passed in list.
+        /// </summary>
+        Task<IEnumerable<Movie>> GetMoviesByIdsAsync(IEnumerable<int> movieIds);
+
+        /// <summary>
         /// Get a distinct list of all of the release years in the database.
         /// </summary>
         Task<IEnumerable<string?>> GetReleaseYearsAsync();

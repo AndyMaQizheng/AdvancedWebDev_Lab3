@@ -23,6 +23,28 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
         }
 
         /// <summary>
+        /// Get all movies where id is in passed in list.
+        /// </summary>
+        public async Task<IEnumerable<Movie>> GetMoviesByIdsAsync(IEnumerable<int> movieIds)
+        {
+            if (movieIds?.Any() ?? false)
+            {
+                return await dbContext.Movies
+                    .Where(m => movieIds.Contains(m.Id))
+                    .Include(m => m.Directors)
+                    .Include(m => m.Casts)
+                    .Include(m => m.Genres)
+                    .Include(m => m.Keywords)
+                    .Include(m => m.Productioncompanies)
+                    .ToListAsync();
+            }
+            else
+            {
+                return new List<Movie>();
+            }            
+        }
+
+        /// <summary>
         /// Get a distinct list of all of the release years in the database.
         /// </summary>
         public async Task<IEnumerable<string?>> GetReleaseYearsAsync()
