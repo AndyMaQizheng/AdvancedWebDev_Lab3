@@ -58,6 +58,17 @@ namespace AdvancedWebDev_Lab3.Controllers
         }
 
         /// <summary>
+        /// Delete a movie by it's id.
+        /// </summary>
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMovieAsync(int id)
+        {
+            await unitOfWork.Movies.DeleteMovieAsync(id);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Get list of filtered movies.
         /// </summary>
         [HttpPost]

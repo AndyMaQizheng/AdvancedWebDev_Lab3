@@ -20,6 +20,11 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos.Interfaces
         Task<IEnumerable<string?>> GetReleaseYearsAsync();
 
         /// <summary>
+        /// Delete a movie by the movie's id.
+        /// </summary>
+        Task DeleteMovieAsync(int id);
+
+        /// <summary>
         /// Get a list of filtered movies from the database.
         /// </summary>
         /// <param name="filters">The filters to apply.</param>

@@ -57,6 +57,21 @@ namespace AdvancedWebDev_Lab3.DataAccess.Repos
         }
 
         /// <summary>
+        /// Delete a movie by the movie's id.
+        /// </summary>
+        public async Task DeleteMovieAsync(int id)
+        {
+            var movie = await dbContext.Movies.FindAsync(id);
+
+            if (movie != null)
+            {
+                dbContext.Movies.Remove(movie);
+
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
         /// Get a list of filtered movies from the database.
         /// </summary>
         /// <param name="filters">The filters to apply.</param>

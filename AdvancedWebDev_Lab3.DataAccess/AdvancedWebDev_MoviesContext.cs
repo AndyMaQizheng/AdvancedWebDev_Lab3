@@ -1,5 +1,8 @@
-﻿using AdvancedWebDev_Lab3.DataAccess.Models;
+﻿using System;
+using System.Collections.Generic;
+using AdvancedWebDev_Lab3.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace AdvancedWebDev_Lab3.DataAccess
 {
@@ -118,7 +121,7 @@ namespace AdvancedWebDev_Lab3.DataAccess
                     .UsingEntity<Dictionary<string, object>>(
                         "Moviescast",
                         l => l.HasOne<Cast>().WithMany().HasForeignKey("CastId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviescast_Cast"),
-                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviescast_Movies"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").HasConstraintName("FK_moviescast_Movies"),
                         j =>
                         {
                             j.HasKey("MovieId", "CastId").HasName("PK_moviespersons");
@@ -135,7 +138,7 @@ namespace AdvancedWebDev_Lab3.DataAccess
                     .UsingEntity<Dictionary<string, object>>(
                         "Moviesdirector",
                         l => l.HasOne<Director>().WithMany().HasForeignKey("DirectorId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviedirectors_Directors"),
-                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviedirectors_Movies"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").HasConstraintName("FK_moviedirectors_Movies"),
                         j =>
                         {
                             j.HasKey("MovieId", "DirectorId").HasName("PK_moviedirectors");
@@ -152,7 +155,7 @@ namespace AdvancedWebDev_Lab3.DataAccess
                     .UsingEntity<Dictionary<string, object>>(
                         "Moviesgenre",
                         l => l.HasOne<Genre>().WithMany().HasForeignKey("GenreId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviesgenres_Genre"),
-                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviesgenres_Movies"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").HasConstraintName("FK_moviesgenres_Movies"),
                         j =>
                         {
                             j.HasKey("MovieId", "GenreId");
@@ -169,7 +172,7 @@ namespace AdvancedWebDev_Lab3.DataAccess
                     .UsingEntity<Dictionary<string, object>>(
                         "Movieskeyword",
                         l => l.HasOne<Keyword>().WithMany().HasForeignKey("KeywordId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_movieskeywords_Keywords"),
-                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_movieskeywords_Movies"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").HasConstraintName("FK_movieskeywords_Movies"),
                         j =>
                         {
                             j.HasKey("MovieId", "KeywordId");
@@ -186,7 +189,7 @@ namespace AdvancedWebDev_Lab3.DataAccess
                     .UsingEntity<Dictionary<string, object>>(
                         "Moviesproductioncompany",
                         l => l.HasOne<ProductionCompany>().WithMany().HasForeignKey("ProductioncompanyId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviesproductioncompanies_ProductionCompanies"),
-                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_moviesproductioncompanies_Movies"),
+                        r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId").HasConstraintName("FK_moviesproductioncompanies_Movies"),
                         j =>
                         {
                             j.HasKey("MovieId", "ProductioncompanyId");
